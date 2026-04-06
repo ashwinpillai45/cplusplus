@@ -9,13 +9,13 @@ struct node {
 
 /*Linked list operations*/
 class linked_list{
-    struct node* head = nullptr;
+    struct node* head = nullptr;                //this the main variable that points to the head
     public:
         
         /*Returns the next node address pointed by the last node */
         struct node* last_value(){
             struct node* ptr=head;
-            while(ptr->nextNode!=nullptr){
+            while(ptr->nextNode!=nullptr){               //go through the linked list and return the pointer to the last node
                 ptr=ptr->nextNode;
             }
             return ptr;
@@ -40,7 +40,7 @@ class linked_list{
         void delete_linked_list(){
             struct node* ptr = head;
             struct node* ptr1 = ptr;
-            while(ptr1->nextNode!=nullptr)
+            while(ptr1->nextNode!=nullptr)                          //go through the linked list and delete all the nodes from head to last value
             {
                 ptr1=ptr->nextNode;
                 free(ptr);
@@ -53,7 +53,7 @@ class linked_list{
         /*Delete the head node*/
         void delete_head(){
             struct node* ptr=head;
-            if(head->nextNode==nullptr){
+            if(head->nextNode==nullptr){                            //check if the head is the only node. in that case it deletes the entire node
                 delete_linked_list();
                 return;
             }
@@ -64,14 +64,14 @@ class linked_list{
 
         /*Delete the first node with the value*/
         void delete_node(uint8_t value){
-            if(value==head->value){
+            if(value==head->value){                                                 //if the value to be deleted is head then use delete_node
                 std::cout << "You are deleting value from head" <<std::endl;
                 delete_head();
                 return;
             }
             struct node* ptr=head->nextNode;
             struct node* ptr1=head;
-            while(ptr->value!=value){
+            while(ptr->value!=value){                                               //go through the linked list and stop at the first instance
                 ptr1=ptr;
                 ptr=ptr->nextNode;
             }
@@ -82,7 +82,7 @@ class linked_list{
         /*Print the entire linked list*/
         void print_linked_list(){
             struct node* ptr=head;
-            while(ptr->nextNode!=nullptr){
+            while(ptr->nextNode!=nullptr){                                          //go through the linked list and print all the values in the node
                 std::cout << static_cast<int>(ptr->value) << "\t";
                 ptr=ptr->nextNode;
             }
