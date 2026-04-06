@@ -15,24 +15,25 @@ class linked_list{
         /*Returns the next node address pointed by the last node */
         struct node* last_value(){
             struct node* ptr=head;
-            while(ptr->nextNode==nullptr){
+            while(ptr->nextNode!=nullptr){
                 ptr=ptr->nextNode;
             }
-            return ptr->nextNode;
+            return ptr;
         }
 
         /*Create a new node and also check if the new node is the first node. Returns the pointer to the new node created*/
-        struct node* create_node(uint8_t value){
+        void create_node(uint8_t value1){
           struct node* ptr = (struct node*)std::malloc(sizeof(struct node));
+          ptr->value=value1;
+          ptr->nextNode=nullptr;
            if(head==nullptr){
                 head=ptr;
-                return ptr;
+                head->value=ptr->value;
+                head->nextNode=ptr->nextNode;
+                return;
             }
           struct node* ptr1=last_value();
-          ptr=ptr1;
-          ptr->value = value;
-          ptr->nextNode = nullptr;
-          return ptr;
+          ptr1->nextNode=ptr;
         }
 
         /*Go through linked list until it matches the value*/
@@ -47,7 +48,7 @@ class linked_list{
 
         /*Delete the head node*/
         void delete_head(){
-
+            return;
         }
 
         /*Delete the first node with the value*/
@@ -61,12 +62,23 @@ class linked_list{
             free(ptr);
         }
 
-        void print_linked_list();
+        void print_linked_list(){
+            struct node* ptr=head;
+            while(ptr->nextNode!=nullptr){
+                std::cout << static_cast<int>(ptr->value)<<std::endl;
+                ptr=ptr->nextNode;
+            }
+            std::cout << static_cast<int>(ptr->value)<<std::endl;
+            return;
+        }
+
         void delete_linked_list();
 };
 
 int main(){
     linked_list ll;
-
-    return; 
+    ll.create_node(23);
+    ll.create_node(45);
+    ll.print_linked_list();
+    return 0;
 }
