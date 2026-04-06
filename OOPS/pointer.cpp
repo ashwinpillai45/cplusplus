@@ -36,7 +36,17 @@ class linked_list{
           ptr1->nextNode=ptr;
         }
 
+        /*Delete the entire linked list*/
         void delete_linked_list(){
+            struct node* ptr = head;
+            struct node* ptr1 = ptr;
+            while(ptr1->nextNode!=nullptr)
+            {
+                ptr1=ptr->nextNode;
+                free(ptr);
+                ptr=ptr1;
+            }
+            free(ptr);
             return;
         }
 
@@ -69,6 +79,7 @@ class linked_list{
             free(ptr);
         }
 
+        /*Print the entire linked list*/
         void print_linked_list(){
             struct node* ptr=head;
             while(ptr->nextNode!=nullptr){
@@ -91,5 +102,10 @@ int main(){
     ll.print_linked_list();
     ll.delete_head();
     ll.print_linked_list();
+    ll.delete_node(45);
+    ll.print_linked_list();
+    ll.delete_node(89);
+    ll.print_linked_list();
+    ll.delete_linked_list();
     return 0;
 }
