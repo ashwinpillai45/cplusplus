@@ -36,18 +36,19 @@ class linked_list{
           ptr1->nextNode=ptr;
         }
 
-        /*Go through linked list until it matches the value
-        struct node* search_value(uint8_t value){
-            struct node* ptr=head;
-            //struct node* address_array=(struct node*)malloc(3*sizeof(struct node*));
-            while(ptr->value!=value){
-                ptr=ptr->nextNode;
-            }
-            //return address_array;
-        }*/
+        void delete_linked_list(){
+            return;
+        }
 
         /*Delete the head node*/
         void delete_head(){
+            struct node* ptr=head;
+            if(head->nextNode==nullptr){
+                delete_linked_list();
+                return;
+            }
+            head=head->nextNode;
+            free(ptr);
             return;
         }
 
@@ -71,14 +72,12 @@ class linked_list{
         void print_linked_list(){
             struct node* ptr=head;
             while(ptr->nextNode!=nullptr){
-                std::cout << static_cast<int>(ptr->value)<<std::endl;
+                std::cout << static_cast<int>(ptr->value) << "\t";
                 ptr=ptr->nextNode;
             }
             std::cout << static_cast<int>(ptr->value)<<std::endl;
             return;
         }
-
-        void delete_linked_list();
 };
 
 int main(){
@@ -90,7 +89,7 @@ int main(){
     ll.create_node(89);
     ll.create_node(99);
     ll.print_linked_list();
-    ll.delete_node(103);
+    ll.delete_head();
     ll.print_linked_list();
     return 0;
 }
